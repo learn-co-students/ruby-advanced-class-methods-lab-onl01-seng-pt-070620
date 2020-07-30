@@ -11,55 +11,23 @@ class Song
   end
 
   def self.create
-    song = self.new
+    song = Song.new
     song.save
     song
   end
 
   def self.new_by_name(name)
-    song = self.new
+    song = Song.new
     song.name = name
     song
   end
 
   def self.create_by_name(name)
-    song = self.new
+    song = Song.new
     song.name = name
     song.save
     song
   end
 
-  def self.find_by_name(name)
-    @@all.find {|x| x.name == name}     # This will find by name
-    #@@all.select {|x| x.name == name}  # This will find instance variable
-  end
 
-  def self.find_or_create_by_name(name)
-    self.find_by_name(name)  ||   # First try to find by name if true
-    self.create_by_name(name)     # Create by name will be called if false
-  end
-
-  def self.alphabetical
-    @@all.sort_by {|x| x.name}
-  end
-
-  def self.new_from_filename(name)
-    song = self.new
-    song.name = name.split(" - ")[1].chomp(".mp3")
-    song.artist_name = name.split(" - ")[0]
-    song
-  end
-
-  def self.create_from_filename(name)
-    song = self.new
-    song.name = name.split(" - ")[1].chomp(".mp3")
-    song.artist_name = name.split(" - ")[0]
-    song.save
-    song
-  end
-
-  def self.destroy_all
-    @@all = []
-    # @@all.clear # This will do the same thing
-  end
 end
