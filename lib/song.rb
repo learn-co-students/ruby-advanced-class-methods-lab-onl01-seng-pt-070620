@@ -21,13 +21,15 @@ class Song
   def self.new_by_name(name)
     song = self.new
     song.name = name
+    song.save
     song
   end
   
   def self.create_by_name(name)
-    song = self.new 
+    # song = self.new 
+    song = self.create
     song.name = name 
-    self.all << song
+    # self.all << song
     song
   end
   
@@ -53,6 +55,7 @@ class Song
     song = self.new
     song.artist_name = artist
     song.name = name
+    song.save
     song
   end
   
@@ -60,10 +63,8 @@ class Song
     data = song_mp3_format.split(" - ")
     artist = data[0]
     name = data[1].delete_suffix(".mp3")
-    song = self.new
+    song = self.create_by_name(name)
     song.artist_name = artist
-    song.name = name
-    self.all << song
     song
   end
   
